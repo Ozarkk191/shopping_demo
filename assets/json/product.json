@@ -1,0 +1,49 @@
+{
+    "product": [
+        {
+            "category": "เครื่องเขียน",
+            "description": "ปากกาลูกลื่น 0.7 มม. หมึกสีน้ำเงิน ด้ามน้ำเงิน",
+            "discount": 0.1,
+            "number_of_pieces": 100,
+            "product_img": "https://aumento.officemate.co.th/media/catalog/product/O/F/OFM1007309.jpg",
+            "product_name": "ปากกา",
+            "product_price": 10.50
+        },
+        {
+            "category": "เครื่องเขียน",
+            "description": "ดินสอไม้HB เกรดA (พร้อมส่ง) ดินสอด้ามไม้ ยาว 19 CM",
+            "discount": 0.0,
+            "number_of_pieces": 10,
+            "product_img": "https://media.allonline.7eleven.co.th/pdmain/357812_00_pencil_yoya.jpg",
+            "product_name": "ดินสอ",
+            "product_price": 5.00
+        },
+        {
+            "category": "เครื่องเขียน",
+            "description": "สีไม้ colleen 24สี, 36สี,48สี (2หัว)",
+            "discount": 0.25,
+            "number_of_pieces": 0,
+            "product_img": "https://th-test-11.slatic.net/p/16ae621824fc9de90efabf8094937880.png",
+            "product_name": "สีไม้",
+            "product_price": 50.00
+        },
+        {
+            "category": "เครื่องเขียน",
+            "description": "กระดาษถ่ายเอกสารA4 250แผ่น/ห่อ - ขาว - A4 (210 x 297 มม.)",
+            "discount": 0.15,
+            "number_of_pieces": 200,
+            "product_img": "https://media.shopat24.com/pdmain/357844_01_paper_double_a.jpg",
+            "product_name": "กระดาษ A4",
+            "product_price": 30.00
+        },
+        {
+            "category": "เครื่องเขียน",
+            "description": "ยางลบดินสอ (แพ็ค3ก้อน) ยางลบก้อนขาว STAEDTLER ไม่เป็นขุย ไม่ทำลายเนื้อกระดาษ รุ่น 526 35 F",
+            "discount": 0.0,
+            "number_of_pieces": 80,
+            "product_img": "https://aumento.officemate.co.th/media/catalog/product/O/F/OFM1002916_X2.jpg",
+            "product_name": "ยางลบ",
+            "product_price": 3.00
+        }
+    ]
+}
