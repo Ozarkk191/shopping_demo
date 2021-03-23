@@ -1,5 +1,12 @@
+import 'dart:convert';
+import 'dart:developer';
+
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:test_work/model/cart_model.dart';
 import 'package:test_work/model/product_model.dart';
+import 'package:test_work/src/page/cart_page.dart';
 import 'package:test_work/src/widget/banner/banner.dart';
 import 'package:test_work/src/widget/button/icon_button.dart';
 import 'package:test_work/src/widget/button/main_button.dart';
@@ -18,12 +25,53 @@ class _ProductDetailState extends State<ProductDetail> {
   double discountPrice;
   double eco;
   bool fav = false;
+  int pieces = 1;
+  int badge = 0;
+  List<String> _cartList = <String>[];
+
+  getCartSF() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var _badge = prefs.getInt('badge') ?? 0;
+    final cartList = prefs.getStringList('cart');
+    if (cartList != null) {
+      _cartList = cartList;
+    }
+
+    badge = _badge;
+
+    setState(() {});
+  }
+
+  Future<void> saveCartSf() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    CartModel cart = CartModel(
+      description: widget.product.description,
+      discount: widget.product.discount,
+      pieces: pieces,
+      productImg: widget.product.productImg,
+      productName: widget.product.productName,
+      productPrice: widget.product.productPrice,
+    );
+
+    _cartList.add(json.encode(cart.toJson()).toString());
+
+    prefs.setStringList('cart', _cartList);
+    Toast.show("เพิ่มไปยังรถเข็นแล้ว", context,
+        duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+    badge = badge + 1;
+    prefs.setInt('badge', badge);
+    setState(() {});
+  }
+
   @override
   void initState() {
     discount = widget.product.discount * 100;
     discountPrice = widget.product.productPrice -
         (widget.product.productPrice * widget.product.discount);
     eco = widget.product.productPrice * widget.product.discount;
+    // log("${widget.product.toJson()}");
+    getCartSF();
+
     super.initState();
   }
 
@@ -36,8 +84,28 @@ class _ProductDetailState extends State<ProductDetail> {
         title: Text('${widget.product.productName}'),
         actions: [
           InkWell(
-            onTap: () {},
-            child: Icon(Icons.shopping_cart_outlined),
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CartPage(
+                    product: widget.product,
+                  ),
+                ),
+              );
+            },
+            child: Container(
+              width: 50,
+              height: 50,
+              child: Center(
+                child: badge != 0
+                    ? Badge(
+                        badgeContent: Text('$badge'),
+                        child: Icon(Icons.shopping_cart_outlined),
+                      )
+                    : Icon(Icons.shopping_cart_outlined),
+              ),
+            ),
           )
         ],
       ),
@@ -127,19 +195,31 @@ class _ProductDetailState extends State<ProductDetail> {
               child: Row(
                 children: [
                   IconMainButton(
-                    onTap: () {},
+                    onTap: widget.product.numberOfPieces == 0
+                        ? null
+                        : () {
+                            saveCartSf();
+                          },
                     icon: Icons.add_shopping_cart,
                     width: 60,
-                    backgroundColor: Colors.orange[900],
+                    backgroundColor: widget.product.numberOfPieces == 0
+                        ? Colors.grey
+                        : Colors.orange[900],
                   ),
                   Expanded(
                     child: MainButton(
                       onTap: widget.product.numberOfPieces == 0
                           ? null
                           : () {
-                              Toast.show("Coming Soon!", context,
-                                  duration: Toast.LENGTH_SHORT,
-                                  gravity: Toast.BOTTOM);
+                              saveCartSf();
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => CartPage(
+                                    product: widget.product,
+                                  ),
+                                ),
+                              );
                             },
                       width: _size.width * 0.5,
                       textButton: "ซื้อสินค้า",

@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
-        title: Text('Products'),
+        title: Text('Shopping Demo'),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
