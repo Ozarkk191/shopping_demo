@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:test_work/model/product_model.dart';
 
@@ -9,5 +10,12 @@ class ProductService {
     final data = await json.decode(response);
     ProductModel model = ProductModel.fromJson(data);
     return model.product;
+  }
+
+  static Future<void> createFile(String content) async {
+    Directory dir;
+    File file = new File(dir.path + "assets/json/address_custommer.json");
+    file.createSync();
+    file.writeAsStringSync(content);
   }
 }

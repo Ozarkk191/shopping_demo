@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:test_work/model/cart_model.dart';
 import 'package:test_work/model/product_model.dart';
+import 'package:test_work/src/page/address_page.dart';
 import 'package:test_work/src/page/product_detail.dart';
 import 'package:test_work/src/widget/button/main_button.dart';
 import 'dart:convert';
@@ -236,11 +237,17 @@ class _CartPageState extends State<CartPage> {
                     ),
                     MainButton(
                       onTap: () {
-                        Toast.show("coming soon", context,
-                            duration: Toast.LENGTH_SHORT,
-                            gravity: Toast.BOTTOM);
+                        // Toast.show("coming soon", context,
+                        //     duration: Toast.LENGTH_SHORT,
+                        //     gravity: Toast.BOTTOM);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AddressPage(),
+                          ),
+                        );
                       },
-                      textButton: 'ชำระเงิน',
+                      textButton: 'ยืนยัน',
                       borderRadius: 0,
                     )
                   ],
