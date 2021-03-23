@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test_work/model/product_model.dart';
 import 'package:test_work/src/widget/banner/banner.dart';
+import 'package:test_work/src/widget/button/icon_button.dart';
 import 'package:test_work/src/widget/button/main_button.dart';
 import 'package:toast/toast.dart';
 
@@ -33,6 +34,12 @@ class _ProductDetailState extends State<ProductDetail> {
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
         title: Text('${widget.product.productName}'),
+        actions: [
+          InkWell(
+            onTap: () {},
+            child: Icon(Icons.shopping_cart_outlined),
+          )
+        ],
       ),
       body: SafeArea(
         child: Stack(
@@ -117,19 +124,31 @@ class _ProductDetailState extends State<ProductDetail> {
             ),
             Align(
               alignment: Alignment.bottomCenter,
-              child: MainButton(
-                onTap: widget.product.numberOfPieces == 0
-                    ? null
-                    : () {
-                        Toast.show("Coming Soon!", context,
-                            duration: Toast.LENGTH_SHORT,
-                            gravity: Toast.BOTTOM);
-                      },
-                width: _size.width * 0.8,
-                textButton: "ซื้อสินค้า",
-                backgroundColor: widget.product.numberOfPieces == 0
-                    ? Colors.grey
-                    : Colors.red[900],
+              child: Row(
+                children: [
+                  IconMainButton(
+                    onTap: () {},
+                    icon: Icons.add_shopping_cart,
+                    width: 60,
+                    backgroundColor: Colors.orange[900],
+                  ),
+                  Expanded(
+                    child: MainButton(
+                      onTap: widget.product.numberOfPieces == 0
+                          ? null
+                          : () {
+                              Toast.show("Coming Soon!", context,
+                                  duration: Toast.LENGTH_SHORT,
+                                  gravity: Toast.BOTTOM);
+                            },
+                      width: _size.width * 0.5,
+                      textButton: "ซื้อสินค้า",
+                      backgroundColor: widget.product.numberOfPieces == 0
+                          ? Colors.grey
+                          : Colors.red[900],
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
