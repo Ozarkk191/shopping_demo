@@ -45,7 +45,8 @@ class ProductCardItem extends StatelessWidget {
                         color: Colors.amber,
                         child: Center(
                           child: Text(
-                            "$discount%",
+                            "ลด\n$discount%",
+                            textAlign: TextAlign.center,
                             style: TextStyle(fontSize: 11, color: Colors.white),
                           ),
                         ),

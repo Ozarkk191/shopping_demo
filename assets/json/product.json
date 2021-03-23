@@ -7,7 +7,9 @@
             "number_of_pieces": 100,
             "product_img": "https://aumento.officemate.co.th/media/catalog/product/O/F/OFM1007309.jpg",
             "product_name": "ปากกา",
-            "product_price": 10.50
+            "product_price": 10.50,
+            "sold": 30,
+            "rate": 4.2
         },
         {
             "category": "เครื่องเขียน",
@@ -16,7 +18,9 @@
             "number_of_pieces": 10,
             "product_img": "https://media.allonline.7eleven.co.th/pdmain/357812_00_pencil_yoya.jpg",
             "product_name": "ดินสอ",
-            "product_price": 5.00
+            "product_price": 5.00,
+            "sold": 3,
+            "rate": 4.5
         },
         {
             "category": "เครื่องเขียน",
@@ -25,7 +29,9 @@
             "number_of_pieces": 0,
             "product_img": "https://th-test-11.slatic.net/p/16ae621824fc9de90efabf8094937880.png",
             "product_name": "สีไม้",
-            "product_price": 50.00
+            "product_price": 50.00,
+            "sold": 21,
+            "rate": 1.2
         },
         {
             "category": "เครื่องเขียน",
@@ -34,7 +40,9 @@
             "number_of_pieces": 200,
             "product_img": "https://media.shopat24.com/pdmain/357844_01_paper_double_a.jpg",
             "product_name": "กระดาษ A4",
-            "product_price": 30.00
+            "product_price": 30.00,
+            "sold": 100,
+            "rate": 3.8
         },
         {
             "category": "เครื่องเขียน",
@@ -43,7 +51,9 @@
             "number_of_pieces": 80,
             "product_img": "https://aumento.officemate.co.th/media/catalog/product/O/F/OFM1002916_X2.jpg",
             "product_name": "ยางลบ",
-            "product_price": 3.00
+            "product_price": 3.00,
+            "sold": 43,
+            "rate": 4.4
         }
     ]
 }

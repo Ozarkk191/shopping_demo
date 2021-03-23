@@ -24,6 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   filter_list: ^0.0.6
+  toast: ^0.1.5
 
 
 
