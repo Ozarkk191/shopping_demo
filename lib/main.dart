@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:test_work/src/page/home_page.dart';
+import 'package:test_work/src/page/splash_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,11 +10,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Product',
+      title: 'Product Test',
       theme: ThemeData(
         primarySwatch: Colors.orange,
       ),
-      home: HomePage(),
+      home: SplashPage(),
     );
   }
 }
