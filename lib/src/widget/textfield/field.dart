@@ -3,9 +3,15 @@ import 'package:flutter/material.dart';
 class Field extends StatelessWidget {
   final double width;
   final String text;
+  final bool enable;
   final TextEditingController controller;
 
-  const Field({Key key, @required this.width, this.text, this.controller})
+  const Field(
+      {Key key,
+      @required this.width,
+      this.text,
+      this.controller,
+      this.enable = true})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -17,6 +23,7 @@ class Field extends StatelessWidget {
           Text('$text'),
           SizedBox(height: 5),
           TextField(
+            enabled: enable,
             controller: controller,
             textAlign: TextAlign.center,
             decoration: InputDecoration(

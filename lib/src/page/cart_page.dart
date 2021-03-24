@@ -2,9 +2,11 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:test_work/model/address_model.dart';
 import 'package:test_work/model/cart_model.dart';
 import 'package:test_work/model/product_model.dart';
 import 'package:test_work/src/page/address_page.dart';
+import 'package:test_work/src/page/payment_page.dart';
 import 'package:test_work/src/page/product_detail.dart';
 import 'package:test_work/src/widget/button/main_button.dart';
 import 'dart:convert';
@@ -24,6 +26,7 @@ class _CartPageState extends State<CartPage> {
   int badge = 0;
   double total = 0;
   double sum = 0;
+  String checkAddress = "ไม่มี";
 
   Future<List<CartModel>> getCartSF() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -32,6 +35,15 @@ class _CartPageState extends State<CartPage> {
 
     var _badge = prefs.getInt('badge') ?? 0;
     badge = _badge;
+
+    checkAddress = prefs.getString('address') ?? 'ไม่มี';
+    if (checkAddress != "ไม่มี") {
+      final data = await json.decode(checkAddress);
+      var address = AddressModel.fromJson(data);
+      checkAddress =
+          "${address.name}\n${address.address}\n${address.code}\n${address.phone}\n";
+      log(checkAddress);
+    }
 
     _cartStringList = prefs.getStringList('cart');
     if (_cartStringList != null) {
@@ -96,6 +108,19 @@ class _CartPageState extends State<CartPage> {
                 margin: EdgeInsets.only(bottom: 60),
                 child: Column(
                   children: [
+                    _address(
+                      width: MediaQuery.of(context).size.width,
+                      onTap: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AddressPage(
+                              product: widget.product,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
                     FutureBuilder(
                       future: getCartSF(),
                       builder: (BuildContext context,
@@ -237,15 +262,18 @@ class _CartPageState extends State<CartPage> {
                     ),
                     MainButton(
                       onTap: () {
-                        // Toast.show("coming soon", context,
-                        //     duration: Toast.LENGTH_SHORT,
-                        //     gravity: Toast.BOTTOM);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => AddressPage(),
-                          ),
-                        );
+                        if (checkAddress == "ไม่มี") {
+                          Toast.show("กรุณากรอกที่อยู่", context,
+                              duration: Toast.LENGTH_SHORT,
+                              gravity: Toast.BOTTOM);
+                        } else {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PaymentPage(
+                                        total: sum,
+                                      )));
+                        }
                       },
                       textButton: 'ยืนยัน',
                       borderRadius: 0,
@@ -256,6 +284,37 @@ class _CartPageState extends State<CartPage> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Container _address({double width, Function onTap}) {
+    return Container(
+      width: width,
+      color: Colors.white,
+      padding: EdgeInsets.all(10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'ที่อยู่สำหรับจัดส่ง',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              Text(
+                '$checkAddress',
+                style:
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
+              ),
+            ],
+          ),
+          InkWell(
+            onTap: onTap,
+            child: Icon(Icons.edit),
+          ),
+        ],
       ),
     );
   }
