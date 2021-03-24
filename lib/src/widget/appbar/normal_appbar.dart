@@ -28,7 +28,7 @@ class NormalAppbar extends StatelessWidget {
                 child: Container(
                   width: 50,
                   height: 50,
-                  child: Icon(Icons.arrow_back_ios_sharp),
+                  child: Icon(Icons.arrow_back),
                 ),
               ),
             )
